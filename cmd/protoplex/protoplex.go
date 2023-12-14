@@ -39,6 +39,7 @@ func main() {
 	socks5 := app.Flag("socks5", "The SOCKS5 server address").String()
 	socks4 := app.Flag("socks4", "The SOCKS4 server address").String()
 	// stRelay := flag.String("strelay", "", "The Syncthing Relay server address")
+	relay := app.Flag("relay", "The Relay server address").String()
 
 	_, _ = app.Parse(os.Args[1:])
 
@@ -82,6 +83,9 @@ func main() {
 	}
 	if *http != "" {
 		p = append(p, protocols.NewHTTPProtocol(*http))
+	}
+	if *relay != "" {
+		p = append(p, protocols.NewRelayProtocol(*relay))
 	}
 
 	protoplex.RunServer(*bind, p, logger)

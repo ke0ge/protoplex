@@ -126,6 +126,11 @@ func DetermineProtocol(data []byte, p []*protocols.Protocol) *protocols.Protocol
 				return protocol
 			}
 		}
+
+		// Cover up, directly forward all remaining traffic.
+		if protocol.Name == "Relay" {
+			return protocol
+		}
 	}
 	return nil
 }
