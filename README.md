@@ -62,9 +62,18 @@ Currently supported protocols are:
 - TLS (/ HTTPS)
 - OpenVPN
 - SOCKS4 / SOCKS5
+- Relay（兜底转发）
 
 Feel free to [file an issue](https://github.com/Pandentia/protoplex/issues/new)
 on the GitHub repository if you want a protocol to be supported. Please include
 steps to accurately reproduce your client setup.
 
 Alternatively, you may submit a pull request.
+
+## 编译
+```
+set GOARCH=amd64
+set GOOS=windows
+set Version=v1.2
+go build -trimpath -ldflags="-s -w" -ldflags="-X main.version=%Version%" -o protoplex_%GOOS%_%GOARCH%.exe cmd\protoplex\protoplex.go
+```
